@@ -19,3 +19,8 @@ All repository objects use the ownership description marker `base3-ilias-demo-da
 Creation and removal are exposed through the BASE3 administration `Demo Data` tab and use AJAX JSON requests. Repository removal uses the ILIAS repository deletion lifecycle that was verified by the lifecycle test before this full seed was built.
 
 Removal deletes the complete managed subtree, all managed demo users, and the managed global role, then verifies that these managed objects no longer exist.
+
+
+## BASE3 settings integration
+
+`base3.json` makes this module discoverable by ILIAS' BASE3 module registry and classmap. The feature-backed `IliasdemodatalifecycleSettingsTab` contributes to the BASE3 group. Every direct display request requires native `system/admin` and the feature audience. Managed create/remove actions require POST with a session-bound CSRF token. Ownership markers and the existing deletion boundary are unchanged.

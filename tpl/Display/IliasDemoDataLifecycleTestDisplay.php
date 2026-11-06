@@ -1,4 +1,4 @@
-<div id="ilias-demo-data-seed" class="ilias-demo-data-seed-ui" data-ilias-demo-data-seed-ui data-endpoint="<?php echo htmlspecialchars((string)$this->_['endpoint'], ENT_QUOTES); ?>">
+<div id="ilias-demo-data-seed" class="ilias-demo-data-seed-ui" data-ilias-demo-data-seed-ui data-endpoint="<?php echo htmlspecialchars((string)$this->_['endpoint'], ENT_QUOTES); ?>" data-csrf="<?php echo htmlspecialchars((string)$this->_['csrfToken'], ENT_QUOTES); ?>">
 	<div data-ilias-demo-data-content>
 		<?php echo (string)$this->_['body']; ?>
 	</div>
@@ -91,7 +91,8 @@
 			action: form.dataset.action || '',
 			parent_ref_id: parentInput ? Number(parentInput.value) : 0,
 			password: passwordInput ? passwordInput.value : '',
-			confirm_remove: confirmInput ? confirmInput.checked : false
+			confirm_remove: confirmInput ? confirmInput.checked : false,
+			csrf: root.dataset.csrf || ''
 		};
 
 		submitting = true;

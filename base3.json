@@ -1,0 +1,13 @@
+{
+  "manifestVersion": 1,
+  "name": "IliasDemoData",
+  "namespace": "IliasDemoData",
+  "version": "1.0.0",
+  "description": "Managed ILIAS demo content lifecycle and administration",
+  "license": "GPL-3.0-or-later",
+  "dependencies": {
+    "Base3Framework": ">=4.10.0",
+    "UiFoundation": ">=4.3.0",
+    "Base3Ilias": ">=4.21.0"
+  }
+}

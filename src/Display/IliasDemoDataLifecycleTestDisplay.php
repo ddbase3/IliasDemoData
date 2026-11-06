@@ -3,8 +3,11 @@
 namespace IliasDemoData\Display;
 
 use Base3\Api\IDisplay;
+use Base3\Authorization\Api\IAuthorizationService;
+use UiFoundation\Settings\SettingsAdministrationAccess;
 use Base3\Api\IMvcView;
 use Base3\Api\IRequest;
+use Base3\Session\Api\ISession;
 use Base3\LinkTarget\Api\ILinkTargetService;
 use IliasDemoData\Api\IDemoDataLifecycleService;
 use RuntimeException;
@@ -13,12 +16,15 @@ use Throwable;
 final class IliasDemoDataLifecycleTestDisplay implements IDisplay {
 
 	private array $translations = [];
+	private const CSRF_KEY = 'iliasdemodata.lifecycle.csrf';
 
 	public function __construct(
 		private readonly IRequest $request,
 		private readonly IMvcView $view,
 		private readonly ILinkTargetService $linkTargetService,
-		private readonly IDemoDataLifecycleService $lifecycleService
+		private readonly IDemoDataLifecycleService $lifecycleService,
+		private readonly IAuthorizationService $settingsAuthorization,
+		private readonly ISession $session
 	) {}
 
 	public static function getName(): string {
@@ -33,6 +39,13 @@ final class IliasDemoDataLifecycleTestDisplay implements IDisplay {
 	}
 
 	public function getOutput(string $out = 'html', bool $final = false): string {
+		if (!SettingsAdministrationAccess::isAllowed(
+			$this->settingsAuthorization, \IliasDemoData\SettingsTab\IliasdemodatalifecycleSettingsTab::getName()
+		)) {
+			http_response_code(403);
+			return '';
+		}
+
 		$this->loadTranslations();
 
 		return strtolower($out) === 'json'
@@ -52,6 +65,7 @@ final class IliasDemoDataLifecycleTestDisplay implements IDisplay {
 		$this->view->setPath(\DIR_COMPONENTS . 'Base3/IliasDemoData');
 		$this->view->setTemplate('Display/IliasDemoDataLifecycleTestDisplay.php');
 		$this->view->assign('endpoint', $this->buildEndpoint());
+		$this->view->assign('csrfToken', $this->csrfToken());
 		$this->view->assign('body', $body);
 
 		return $this->view->loadTemplate();
@@ -67,6 +81,10 @@ final class IliasDemoDataLifecycleTestDisplay implements IDisplay {
 
 		try {
 			$action = trim((string)($payload['action'] ?? ''));
+			if (in_array($action, ['create', 'remove'], true) && !$this->validCsrf($payload)) {
+				http_response_code(403);
+				throw new RuntimeException($this->translations['invalid_request']);
+			}
 			if ($action === 'create') {
 				$result = $this->lifecycleService->create(
 					$parentRefId,
@@ -112,6 +130,23 @@ final class IliasDemoDataLifecycleTestDisplay implements IDisplay {
 			$response,
 			JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES
 		);
+	}
+
+	private function csrfToken(): string {
+		$token = $this->session->get(self::CSRF_KEY, '');
+		if (!is_string($token) || strlen($token) !== 64) {
+			$token = bin2hex(random_bytes(32));
+			$this->session->set(self::CSRF_KEY, $token);
+		}
+		return $token;
+	}
+
+	private function validCsrf(array $payload): bool {
+		$token = $this->session->get(self::CSRF_KEY, '');
+		return strtoupper((string)$this->request->server('REQUEST_METHOD', '')) === 'POST'
+			&& is_string($token) && strlen($token) === 64
+			&& is_string($payload['csrf'] ?? null)
+			&& hash_equals($token, $payload['csrf']);
 	}
 
 	private function renderBody(int $parentRefId, array $status, ?array $result, string $error): string {
