@@ -1,14 +1,29 @@
 <?php declare(strict_types=1);
 
-namespace IliasDemoData\Test\SettingsTab;
+/***********************************************************************
+ * This file is part of IliasDemoData for BASE3 Framework.
+ *
+ * IliasDemoData manages ILIAS demonstration content lifecycles.
+ * It owns controlled seed content and related administration views.
+ * Native ILIAS repository and authorization boundaries are preserved.
+ *
+ * Developed by Daniel Dahme
+ * Licensed under GPL-3.0-or-later
+ * https://www.gnu.org/licenses/gpl-3.0.en.html
+ *
+ * https://base3.de
+ ***********************************************************************/
 
-use Base3\Authorization\Api\IFeature;
-use IliasDemoData\Display\IliasDemoDataLifecycleTestDisplay;
-use IliasDemoData\SettingsTab\IliasdemodatalifecycleSettingsTab;
-use IliasDemoData\Test\Fixture\DemoIliasAuthorization;
-use IliasDemoData\Test\Fixture\DemoIliasTranslation;
+
+namespace Base3\IliasDemoData\Test\SettingsTab;
+
+use Base3\CoreFoundation\Authorization\Api\IFeature;
+use Base3\IliasDemoData\Display\IliasDemoDataLifecycleTestDisplay;
+use Base3\IliasDemoData\SettingsTab\IliasdemodatalifecycleSettingsTab;
+use Base3\IliasDemoData\Test\Fixture\DemoIliasAuthorization;
+use Base3\IliasDemoData\Test\Fixture\DemoIliasTranslation;
 use PHPUnit\Framework\TestCase;
-use UiFoundation\Api\ISettingsTab;
+use Base3\UiFoundation\Api\ISettingsTab;
 
 final class IliasdemodatalifecycleSettingsTabTest extends TestCase {
 

@@ -1,11 +1,26 @@
 <?php declare(strict_types=1);
 
-namespace IliasDemoData;
+/***********************************************************************
+ * This file is part of IliasDemoData for BASE3 Framework.
+ *
+ * IliasDemoData manages ILIAS demonstration content lifecycles.
+ * It owns controlled seed content and related administration views.
+ * Native ILIAS repository and authorization boundaries are preserved.
+ *
+ * Developed by Daniel Dahme
+ * Licensed under GPL-3.0-or-later
+ * https://www.gnu.org/licenses/gpl-3.0.en.html
+ *
+ * https://base3.de
+ ***********************************************************************/
 
-use Base3\Api\IContainer;
-use Base3\Api\IPlugin;
-use IliasDemoData\Api\IDemoDataLifecycleService;
-use IliasDemoData\Service\IliasDemoDataLifecycleService;
+
+namespace Base3\IliasDemoData;
+
+use Base3\CoreFoundation\Api\IContainer;
+use Base3\CoreFoundation\Api\IPlugin;
+use Base3\IliasDemoData\Api\IDemoDataLifecycleService;
+use Base3\IliasDemoData\Service\IliasDemoDataLifecycleService;
 use ILIAS\DI\Container;
 
 final class IliasDemoDataPlugin implements IPlugin {

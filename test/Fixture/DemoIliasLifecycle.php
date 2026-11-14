@@ -1,8 +1,23 @@
 <?php declare(strict_types=1);
 
-namespace IliasDemoData\Test\Fixture;
+/***********************************************************************
+ * This file is part of IliasDemoData for BASE3 Framework.
+ *
+ * IliasDemoData manages ILIAS demonstration content lifecycles.
+ * It owns controlled seed content and related administration views.
+ * Native ILIAS repository and authorization boundaries are preserved.
+ *
+ * Developed by Daniel Dahme
+ * Licensed under GPL-3.0-or-later
+ * https://www.gnu.org/licenses/gpl-3.0.en.html
+ *
+ * https://base3.de
+ ***********************************************************************/
 
-use IliasDemoData\Api\IDemoDataLifecycleService;
+
+namespace Base3\IliasDemoData\Test\Fixture;
+
+use Base3\IliasDemoData\Api\IDemoDataLifecycleService;
 use RuntimeException;
 
 final class DemoIliasLifecycle implements IDemoDataLifecycleService {

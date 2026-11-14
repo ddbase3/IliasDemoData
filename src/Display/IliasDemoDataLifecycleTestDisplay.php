@@ -1,15 +1,30 @@
 <?php declare(strict_types=1);
 
-namespace IliasDemoData\Display;
+/***********************************************************************
+ * This file is part of IliasDemoData for BASE3 Framework.
+ *
+ * IliasDemoData manages ILIAS demonstration content lifecycles.
+ * It owns controlled seed content and related administration views.
+ * Native ILIAS repository and authorization boundaries are preserved.
+ *
+ * Developed by Daniel Dahme
+ * Licensed under GPL-3.0-or-later
+ * https://www.gnu.org/licenses/gpl-3.0.en.html
+ *
+ * https://base3.de
+ ***********************************************************************/
 
-use Base3\Api\IDisplay;
-use Base3\Authorization\Api\IAuthorizationService;
-use UiFoundation\Settings\SettingsAdministrationAccess;
-use Base3\Api\IMvcView;
-use Base3\Api\IRequest;
-use Base3\Session\Api\ISession;
-use Base3\LinkTarget\Api\ILinkTargetService;
-use IliasDemoData\Api\IDemoDataLifecycleService;
+
+namespace Base3\IliasDemoData\Display;
+
+use Base3\CoreFoundation\Api\IDisplay;
+use Base3\CoreFoundation\Authorization\Api\IAuthorizationService;
+use Base3\UiFoundation\Settings\SettingsAdministrationAccess;
+use Base3\CoreFoundation\Api\IMvcView;
+use Base3\CoreFoundation\Api\IRequest;
+use Base3\CoreFoundation\Session\Api\ISession;
+use Base3\CoreFoundation\LinkTarget\Api\ILinkTargetService;
+use Base3\IliasDemoData\Api\IDemoDataLifecycleService;
 use RuntimeException;
 use Throwable;
 
@@ -40,7 +55,7 @@ final class IliasDemoDataLifecycleTestDisplay implements IDisplay {
 
 	public function getOutput(string $out = 'html', bool $final = false): string {
 		if (!SettingsAdministrationAccess::isAllowed(
-			$this->settingsAuthorization, \IliasDemoData\SettingsTab\IliasdemodatalifecycleSettingsTab::getName()
+			$this->settingsAuthorization, \Base3\IliasDemoData\SettingsTab\IliasdemodatalifecycleSettingsTab::getName()
 		)) {
 			http_response_code(403);
 			return '';

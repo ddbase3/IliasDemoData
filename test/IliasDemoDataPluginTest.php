@@ -1,14 +1,29 @@
 <?php declare(strict_types=1);
 
-namespace IliasDemoData\Test;
+/***********************************************************************
+ * This file is part of IliasDemoData for BASE3 Framework.
+ *
+ * IliasDemoData manages ILIAS demonstration content lifecycles.
+ * It owns controlled seed content and related administration views.
+ * Native ILIAS repository and authorization boundaries are preserved.
+ *
+ * Developed by Daniel Dahme
+ * Licensed under GPL-3.0-or-later
+ * https://www.gnu.org/licenses/gpl-3.0.en.html
+ *
+ * https://base3.de
+ ***********************************************************************/
 
-use Base3\Api\IContainer;
-use Base3\Api\IPlugin;
-use IliasDemoData\Api\IDemoDataLifecycleService;
-use IliasDemoData\IliasDemoDataPlugin;
-use IliasDemoData\Service\IliasDemoDataLifecycleService;
-use IliasDemoData\Test\Fixture\DemoIliasContainerSpy;
-use IliasDemoData\Test\Fixture\DemoIliasState;
+
+namespace Base3\IliasDemoData\Test;
+
+use Base3\CoreFoundation\Api\IContainer;
+use Base3\CoreFoundation\Api\IPlugin;
+use Base3\IliasDemoData\Api\IDemoDataLifecycleService;
+use Base3\IliasDemoData\IliasDemoDataPlugin;
+use Base3\IliasDemoData\Service\IliasDemoDataLifecycleService;
+use Base3\IliasDemoData\Test\Fixture\DemoIliasContainerSpy;
+use Base3\IliasDemoData\Test\Fixture\DemoIliasState;
 use ILIAS\DI\Container;
 use PHPUnit\Framework\Attributes\PreserveGlobalState;
 use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
