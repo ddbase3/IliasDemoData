@@ -2,12 +2,20 @@
 	"manifestVersion": 1,
 	"name": "IliasDemoData",
 	"namespace": "Base3\\IliasDemoData",
-	"version": "1.0.0",
+	"version": "5.0.0",
 	"description": "Managed ILIAS demo content lifecycle and administration",
 	"license": "GPL-3.0-or-later",
+	"maintainers": [
+		{
+			"name": "Daniel Dahme",
+			"url": "https://www.base3.de",
+			"email": "info@base3.de"
+		}
+	],
+	"repository": "https://github.com/ddbase3/IliasDemoData",
 	"dependencies": {
-		"Base3Ilias": ">=4.21.0",
-		"CoreFoundation": ">=4.10.0",
-		"UiFoundation": ">=4.3.0"
+		"Base3Ilias": ">=5.0.0",
+		"CoreFoundation": ">=5.0.0",
+		"UiFoundation": ">=5.0.0"
 	}
 }
